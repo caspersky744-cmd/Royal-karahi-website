@@ -1,0 +1,17 @@
+{
+  "name": "royal-karahi-website",
+  "version": "1.0.0",
+  "description": "Premium restaurant website for Royal Karahi",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "restaurant",
+    "website",
+    "royal-karahi"
+  ],
+  "author": "",
+  "license": "MIT"
+}

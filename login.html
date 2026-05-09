@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <span class="logo-icon">♛</span>
+        <a href="index.html" class="logo-text">Royal<span class="logo-accent">Karahi</span></a>
+      </div>
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">Sign in to your account to continue</p>
+
+      <form class="auth-form" id="loginForm" novalidate>
+        <div class="form-group" id="emailGroup">
+          <label for="loginEmail">Email Address</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" required/>
+          </div>
+          <span class="input-error" id="emailErr">Please enter a valid email.</span>
+        </div>
+        <div class="form-group" id="passwordGroup">
+          <label for="loginPassword">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="loginPassword" placeholder="Your password" autocomplete="current-password" required/>
+            <button type="button" class="input-toggle" id="togglePwd" aria-label="Show password">👁️</button>
+          </div>
+          <span class="input-error" id="pwdErr">Please enter your password.</span>
+        </div>
+        <div class="form-options">
+          <label class="remember-me">
+            <input type="checkbox" id="rememberMe"/> Remember me
+          </label>
+          <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="auth-submit-btn">Sign In →</button>
+        <div class="auth-divider">or</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button type="button" class="btn-secondary" style="justify-content:center" onclick="quickDemo('user')">
+            🙋 Demo User Login
+          </button>
+          <button type="button" class="btn-secondary" style="justify-content:center" onclick="quickDemo('admin')">
+            ⚙️ Admin Login
+          </button>
+        </div>
+      </form>
+
+      <div class="auth-switch" style="margin-top:var(--spacing-lg)">
+        Don't have an account? <a href="register.html">Create one</a>
+      </div>
+      <div class="auth-switch" style="margin-top:8px">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Toggle password
+    document.getElementById('togglePwd').addEventListener('click', function() {
+      const inp = document.getElementById('loginPassword');
+      const isText = inp.type === 'text';
+      inp.type = isText ? 'password' : 'text';
+      this.textContent = isText ? '👁️' : '🙈';
+    });
+
+    // Form submit
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const pwd   = document.getElementById('loginPassword').value;
+      let valid = true;
+
+      if (!email || !/\S+@\S+\.\S+/.test(email)) {
+        document.getElementById('emailGroup').classList.add('error');
+        document.getElementById('emailErr').classList.add('show');
+        valid = false;
+      } else {
+        document.getElementById('emailGroup').classList.remove('error');
+        document.getElementById('emailErr').classList.remove('show');
+      }
+      if (!pwd) {
+        document.getElementById('passwordGroup').classList.add('error');
+        document.getElementById('pwdErr').classList.add('show');
+        valid = false;
+      } else {
+        document.getElementById('passwordGroup').classList.remove('error');
+        document.getElementById('pwdErr').classList.remove('show');
+      }
+      if (!valid) return;
+
+      const result = UserDB.login(email, pwd);
+      if (!result.ok) { showToast(result.msg, 'error'); return; }
+      showToast('✅ Welcome back, ' + result.user.name + '!', 'success');
+      setTimeout(() => {
+        location.href = result.user.role === 'admin' ? 'admin.html' : 'index.html';
+      }, 1000);
+    });
+
+    // Quick demo
+    function quickDemo(role) {
+      if (role === 'admin') {
+        document.getElementById('loginEmail').value = 'admin@royalkarahi.pk';
+        document.getElementById('loginPassword').value = 'admin123';
+      } else {
+        UserDB.register('Demo User', 'demo@user.pk', 'demo123');
+        showToast('✅ Logged in as Demo User!', 'success');
+        setTimeout(() => location.href = 'index.html', 1000);
+        return;
+      }
+      document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <span class="logo-icon">♛</span>
+        <a href="index.html" class="logo-text">Royal<span class="logo-accent">Karahi</span></a>
+      </div>
+      <h1 class="auth-title">Create Account</h1>
+      <p class="auth-subtitle">Join Royal Karahi for exclusive offers and easy ordering</p>
+
+      <form class="auth-form" id="registerForm" novalidate>
+        <div class="form-group">
+          <label for="regName">Full Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" id="regName" placeholder="Ahmed Khan" autocomplete="name" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email Address</label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="regEmail" placeholder="you@example.com" autocomplete="email" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regPhone">Phone Number</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📞</span>
+            <input type="tel" id="regPhone" placeholder="+92 300 0000000" autocomplete="tel"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="regPassword" placeholder="Min. 6 characters" autocomplete="new-password" required/>
+            <button type="button" class="input-toggle" id="toggleRegPwd">👁️</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regConfirm">Confirm Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="regConfirm" placeholder="Repeat password" autocomplete="new-password" required/>
+          </div>
+        </div>
+
+        <label class="remember-me" style="margin-bottom:var(--spacing-lg)">
+          <input type="checkbox" id="regTerms" required/>
+          I agree to the <a href="#" style="color:var(--gold-primary)">Terms & Conditions</a>
+        </label>
+
+        <button type="submit" class="auth-submit-btn">Create Account →</button>
+      </form>
+
+      <div class="auth-switch" style="margin-top:var(--spacing-lg)">
+        Already have an account? <a href="login.html">Sign in</a>
+      </div>
+      <div class="auth-switch" style="margin-top:8px">
+        <a href="index.html">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('toggleRegPwd').addEventListener('click', function() {
+      const inp = document.getElementById('regPassword');
+      inp.type = inp.type === 'text' ? 'password' : 'text';
+      this.textContent = inp.type === 'text' ? '🙈' : '👁️';
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name    = document.getElementById('regName').value.trim();
+      const email   = document.getElementById('regEmail').value.trim();
+      const pwd     = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirm').value;
+      const terms   = document.getElementById('regTerms').checked;
+
+      if (!name) { showToast('Please enter your name.', 'error'); return; }
+      if (!email || !/\S+@\S+\.\S+/.test(email)) { showToast('Please enter a valid email.', 'error'); return; }
+      if (pwd.length < 6) { showToast('Password must be at least 6 characters.', 'error'); return; }
+      if (pwd !== confirm) { showToast('Passwords do not match.', 'error'); return; }
+      if (!terms) { showToast('Please accept the Terms & Conditions.', 'error'); return; }
+
+      const result = UserDB.register(name, email, pwd);
+      if (!result.ok) { showToast(result.msg, 'error'); return; }
+      showToast('🎉 Account created! Welcome, ' + name + '!', 'success');
+      setTimeout(() => location.href = 'index.html', 1200);
+    });
+  </script>
+</body>
+</html>

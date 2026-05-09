@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-logo">
+        <div class="logo-text">Royal<span class="logo-accent">Karahi</span></div>
+        <span class="admin-badge">Admin Panel</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section-title">Main</div>
+        <a href="#" class="sidebar-link active" data-tab="dashboard" onclick="switchTab('dashboard',this)">
+          <span class="link-icon">📊</span> Dashboard
+        </a>
+        <a href="#" class="sidebar-link" data-tab="orders" onclick="switchTab('orders',this)">
+          <span class="link-icon">📦</span> Orders
+        </a>
+        <div class="sidebar-section-title">Menu</div>
+        <a href="#" class="sidebar-link" data-tab="menu" onclick="switchTab('menu',this)">
+          <span class="link-icon">🍽️</span> Menu Items
+        </a>
+        <a href="#" class="sidebar-link" data-tab="add-item" onclick="switchTab('add-item',this)">
+          <span class="link-icon">➕</span> Add Item
+        </a>
+        <div class="sidebar-section-title">Users</div>
+        <a href="#" class="sidebar-link" data-tab="users" onclick="switchTab('users',this)">
+          <span class="link-icon">👥</span> Users
+        </a>
+        <div class="sidebar-section-title">Site</div>
+        <a href="index.html" class="sidebar-link">
+          <span class="link-icon">🏠</span> View Website
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-avatar">A</div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Admin</div>
+            <div class="sidebar-user-role">Super Admin</div>
+          </div>
+          <button class="admin-logout-btn" onclick="adminLogout()">⬅</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="admin-main">
+      <!-- Dashboard -->
+      <div class="admin-tab-content active" id="tab-dashboard">
+        <div class="admin-topbar">
+          <h1 class="admin-page-title">Dashboard</h1>
+          <div class="admin-topbar-actions">
+            <button class="theme-toggle" id="themeToggle"><span class="theme-icon">☀️</span></button>
+          </div>
+        </div>
+        <div class="admin-stats" id="dashStats"></div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <span class="admin-card-title">Recent Orders</span>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin-table" id="recentOrdersTable">
+              <thead>
+                <tr>
+                  <th>Order ID</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th><th>Date</th><th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="recentOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders -->
+      <div class="admin-tab-content" id="tab-orders">
+        <div class="admin-topbar">
+          <h1 class="admin-page-title">All Orders</h1>
+        </div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <span class="admin-card-title">Order Management</span>
+            <select id="orderStatusFilter" onchange="renderOrders()" style="background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-primary);padding:8px 12px;border-radius:var(--radius-md);font-size:0.85rem;">
+              <option value="all">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="preparing">Preparing</option>
+              <option value="delivered">Delivered</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin-table">
+              <thead>
+                <tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>Total</th><th>Payment</th><th>Status</th><th>Action</th></tr>
+              </thead>
+              <tbody id="allOrdersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <div class="admin-tab-content" id="tab-menu">
+        <div class="admin-topbar">
+          <h1 class="admin-page-title">Menu Items</h1>
+          <button class="btn-primary" onclick="switchTab('add-item',null)" style="padding:10px 20px;font-size:0.88rem">+ Add Item</button>
+        </div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <span class="admin-card-title">All Menu Items</span>
+            <input type="text" id="menuAdminSearch" placeholder="Search..." onkeyup="renderAdminMenu()" style="background:var(--bg-card);border:1px solid var(--border-color);color:var(--text-primary);padding:8px 14px;border-radius:var(--radius-pill);font-size:0.85rem;outline:none;"/>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin-table">
+              <thead>
+                <tr><th>Emoji</th><th>Name</th><th>Category</th><th>Price</th><th>Rating</th><th>Badge</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="menuAdminBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Item -->
+      <div class="admin-tab-content" id="tab-add-item">
+        <div class="admin-topbar">
+          <h1 class="admin-page-title" id="addItemTitle">Add Menu Item</h1>
+        </div>
+        <div class="admin-card" style="max-width:640px">
+          <div class="admin-card-header">
+            <span class="admin-card-title">Item Details</span>
+          </div>
+          <div style="padding:var(--spacing-xl)">
+            <form id="addItemForm">
+              <input type="hidden" id="editItemId"/>
+              <div class="form-group" style="margin-bottom:var(--spacing-md)">
+                <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Item Name *</label>
+                <input type="text" id="itemName" required style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none"/>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-md)">
+                <div class="form-group" style="margin-bottom:var(--spacing-md)">
+                  <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Category *</label>
+                  <select id="itemCategory" style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none">
+                    <option value="karahi">Chicken Karahi</option>
+                    <option value="biryani">Biryani</option>
+                    <option value="shawarma">Shawarma</option>
+                    <option value="mutton">Mutton</option>
+                    <option value="beef">Beef</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin-bottom:var(--spacing-md)">
+                  <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Price (Rs.) *</label>
+                  <input type="number" id="itemPrice" min="1" required style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none"/>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--spacing-md)">
+                <div style="margin-bottom:var(--spacing-md)">
+                  <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Image URL *</label>
+                  <input type="url" id="itemImage" placeholder="https://..." required style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none"/>
+                </div>
+                <div style="margin-bottom:var(--spacing-md)">
+                  <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Rating (0–5)</label>
+                  <input type="number" id="itemRating" min="0" max="5" step="0.1" placeholder="4.8" style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none"/>
+                </div>
+                <div style="margin-bottom:var(--spacing-md)">
+                  <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Badge</label>
+                  <select id="itemBadge" style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none">
+                    <option value="">None</option>
+                    <option value="popular">🔥 Popular</option>
+                    <option value="new">✨ New</option>
+                    <option value="spicy">🌶️ Spicy</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-bottom:var(--spacing-lg)">
+                <label style="font-size:0.8rem;font-weight:600;text-transform:uppercase;color:var(--text-secondary);display:block;margin-bottom:6px">Description *</label>
+                <textarea id="itemDesc" rows="3" required style="width:100%;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:var(--radius-md);padding:12px 16px;color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;outline:none;resize:vertical"></textarea>
+              </div>
+              <div style="display:flex;gap:var(--spacing-md)">
+                <button type="submit" class="btn-primary" style="flex:1">Save Item</button>
+                <button type="button" class="btn-secondary" onclick="resetItemForm()">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Users -->
+      <div class="admin-tab-content" id="tab-users">
+        <div class="admin-topbar">
+          <h1 class="admin-page-title">Users</h1>
+        </div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <span class="admin-card-title">Registered Users</span>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="admin-table">
+              <thead>
+                <tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Registered</th></tr>
+              </thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Admin Modal (for order details) -->
+  <div class="admin-modal-overlay" id="adminModal">
+    <div class="admin-modal">
+      <div id="adminModalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

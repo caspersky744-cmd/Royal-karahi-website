@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Contact Royal Karahi — Visit us, call us, or order on WhatsApp. Located in Gulberg III, Lahore."/>
+  <title>Contact – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/about.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">♛</span>
+        <span class="logo-text">Royal<span class="logo-accent">Karahi</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><span class="theme-icon">☀️</span></button>
+        <a href="cart.html" class="cart-btn"><span>🛒</span><span class="cart-count" id="cartCount">0</span></a>
+        <a href="login.html" class="btn-login" id="loginBtn">Login</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contact Hero -->
+  <div class="contact-hero">
+    <div class="container">
+      <p class="section-pre reveal-up">Get in Touch</p>
+      <h1 class="reveal-up">Contact <span class="gold-text">Us</span></h1>
+      <p class="reveal-up">We'd love to hear from you — reach out, visit, or order anytime</p>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Info -->
+        <div class="reveal-up">
+          <h2>Find <span class="gold-text">Us Here</span></h2>
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <h4>Address</h4>
+              <p>123 Royal Avenue, Gulberg III<br/>Lahore, Punjab, Pakistan</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <h4>Phone</h4>
+              <a href="tel:+923001234567">+92 300 1234567</a><br/>
+              <a href="tel:+924235001234">042 3500 1234</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <h4>Email</h4>
+              <a href="mailto:info@royalkarahi.pk">info@royalkarahi.pk</a><br/>
+              <a href="mailto:orders@royalkarahi.pk">orders@royalkarahi.pk</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div class="contact-item-text">
+              <h4>Hours</h4>
+              <p>Monday – Sunday<br/>11:00 AM – 11:00 PM</p>
+            </div>
+          </div>
+          <div class="contact-actions">
+            <a href="https://wa.me/923001234567" class="whatsapp-contact-btn" target="_blank">
+              📱 Order on WhatsApp
+            </a>
+            <a href="tel:+923001234567" class="call-btn">
+              📞 Call Us Now
+            </a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="contact-form-card reveal-up">
+          <h2>Send a <span class="gold-text">Message</span></h2>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="contactName">Your Name</label>
+              <input type="text" id="contactName" name="name" placeholder="Ahmed Khan" required/>
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">Email Address</label>
+              <input type="email" id="contactEmail" name="email" placeholder="ahmed@example.com" required/>
+            </div>
+            <div class="form-group">
+              <label for="contactPhone">Phone (optional)</label>
+              <input type="tel" id="contactPhone" name="phone" placeholder="+92 300 0000000"/>
+            </div>
+            <div class="form-group">
+              <label for="contactSubject">Subject</label>
+              <input type="text" id="contactSubject" name="subject" placeholder="Reservation / Feedback / General Query"/>
+            </div>
+            <div class="form-group">
+              <label for="contactMsg">Message</label>
+              <textarea id="contactMsg" name="message" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+            <button type="submit" class="contact-submit-btn">Send Message ✉️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-pre">Location</p>
+        <h2 class="section-title">Find <span class="gold-text">Our Restaurant</span></h2>
+      </div>
+      <div class="map-container reveal-up">
+        <div class="map-overlay-info">
+          <h3>♛ Royal Karahi</h3>
+          <p>123 Royal Avenue, Gulberg III, Lahore</p>
+        </div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3401.1983978085377!2d74.35295!3d31.51773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919047ab4b57ab3%3A0x62d0be3f60a2e0f6!2sGulberg%20III%2C%20Lahore!5e0!3m2!1sen!2spk!4v1234567890"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Royal Karahi Location">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2024 Royal Karahi. All rights reserved. Crafted with ❤️ in Lahore.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank">📱</a>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value.trim();
+      if (!name) { showToast('Please enter your name.', 'error'); return; }
+      showToast(`✅ Thank you, ${name}! We'll get back to you soon.`, 'success');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

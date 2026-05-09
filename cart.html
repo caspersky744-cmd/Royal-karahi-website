@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Your cart — Royal Karahi. Review your order and checkout."/>
+  <title>Cart – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/cart.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <!-- Particle Canvas Background -->
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">♛</span>
+        <span class="logo-text">Royal<span class="logo-accent">Karahi</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><span class="theme-icon">☀️</span></button>
+        <a href="cart.html" class="cart-btn"><span>🛒</span><span class="cart-count" id="cartCount">0</span></a>
+        <a href="login.html" class="btn-login" id="loginBtn">Login</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="cart-page">
+    <div class="container">
+      <h1>Your <span class="gold-text">Cart</span></h1>
+      <div id="cartPageContent"><!-- Populated by JS --></div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="checkout-modal-overlay" id="checkoutOverlay">
+    <div class="checkout-modal">
+      <div id="checkoutContent">
+        <div class="modal-header">
+          <h2>Checkout</h2>
+          <button class="modal-close" onclick="closeCheckout()">✕</button>
+        </div>
+        <form id="checkoutForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="chkName" placeholder="Ahmed Khan" required/>
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" id="chkPhone" placeholder="+92 300 0000000" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Delivery Address</label>
+            <textarea id="chkAddress" placeholder="House No., Street, Area, City" required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" id="chkCity" placeholder="Lahore" required/>
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select id="chkPayment">
+                <option value="cod">Cash on Delivery</option>
+                <option value="easypaisa">EasyPaisa</option>
+                <option value="jazzcash">JazzCash</option>
+                <option value="bank">Bank Transfer</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Order Notes (optional)</label>
+            <textarea id="chkNotes" placeholder="Extra spicy, no onions, etc."></textarea>
+          </div>
+          <div class="summary-total" style="margin-bottom:var(--spacing-sm)">
+            <span>Total</span>
+            <span id="chkTotal" class="gold-text">Rs. 0</span>
+          </div>
+          <button type="submit" class="place-order-btn">🎉 Place Order</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container"><p>© 2024 Royal Karahi. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank">📱</a>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart-page.js"></script>
+</body>
+</html>

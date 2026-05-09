@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="About Royal Karahi — Our story, master chefs, and quality promise since 1995."/>
+  <title>About Us – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/about.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">♛</span>
+        <span class="logo-text">Royal<span class="logo-accent">Karahi</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html" class="nav-link">Menu</a></li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><span class="theme-icon">☀️</span></button>
+        <a href="cart.html" class="cart-btn"><span>🛒</span><span class="cart-count" id="cartCount">0</span></a>
+        <a href="login.html" class="btn-login" id="loginBtn">Login</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- About Hero -->
+  <div class="about-hero">
+    <div class="container">
+      <p class="section-pre reveal-up">Est. 1995 • Lahore, Pakistan</p>
+      <h1 class="reveal-up">Our <span class="gold-text">Story</span></h1>
+      <p class="reveal-up">A legacy of flavour, passion, and tradition — crafted one dish at a time</p>
+    </div>
+  </div>
+
+  <!-- Story Section -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-visual reveal-up">
+          <div class="story-img-frame">
+            <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80" alt="Authentic Karahi Cooking">
+          </div>
+          <div class="story-badge">
+            <span class="year">30+</span>
+            <span class="since">Years</span>
+          </div>
+        </div>
+        <div class="story-text reveal-up">
+          <p class="section-pre">The Royal Karahi Legacy</p>
+          <h2>From a Single <span class="gold-text">Karahi</span> to a Royal Empire</h2>
+          <p>In 1995, in the heart of Lahore's old city, Ustad Ghulam Rasool lit his first fire under a simple iron karahi. With nothing more than fresh tomatoes, hand-ground spices, and decades of family wisdom, he created a dish that would change the city's culinary landscape forever.</p>
+          <p>What began as a humble dhaba by the roadside has grown into Royal Karahi — a celebrated name across Pakistan, synonymous with authentic taste, premium quality, and the warmth of genuine hospitality.</p>
+          <p>Today, Ustad Ghulam's grandsons carry forward his legacy with the same recipes, the same iron karahis, and the same unyielding commitment to perfection. Every dish tells a story. Every bite carries history.</p>
+          <blockquote class="story-highlight">
+            "Food is not just sustenance — it is a memory, a culture, a love letter written in spice and fire."
+            <br/><cite>— Ustad Ghulam Rasool, Founder</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chefs Section -->
+  <section class="chefs-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-pre">Meet the Masters</p>
+        <h2 class="section-title">Our <span class="gold-text">Head Chefs</span></h2>
+        <p class="section-subtitle">The artists behind every dish — masters of their craft with decades of passion</p>
+      </div>
+      <div class="chefs-grid">
+        <div class="chef-card reveal-up">
+          <div class="chef-avatar"><img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=400&q=80" alt="Chef Tariq"></div>
+          <div class="chef-info">
+            <h3>Ustad Tariq Rasool</h3>
+            <span class="chef-title">Head Chef & Master of Karahi</span>
+            <p class="chef-bio">Son of our founder, Tariq has been stirring karahis since he was twelve. His instinct for spice ratios is legendary — no measuring, just mastery.</p>
+            <span class="chef-exp">28 Years Experience</span>
+          </div>
+        </div>
+        <div class="chef-card reveal-up">
+          <div class="chef-avatar"><img src="https://images.unsplash.com/photo-1583394238182-6f3ad43ebb6c?auto=format&fit=crop&w=400&q=80" alt="Chef Imran"></div>
+          <div class="chef-info">
+            <h3>Chef Imran Khan</h3>
+            <span class="chef-title">Biryani Specialist</span>
+            <p class="chef-bio">Trained in Hyderabad and Lahore, Chef Imran's biryani has been praised by food critics across Pakistan. Every grain is a testament to his patience.</p>
+            <span class="chef-exp">20 Years Experience</span>
+          </div>
+        </div>
+        <div class="chef-card reveal-up">
+          <div class="chef-avatar"><img src="https://images.unsplash.com/photo-1622021142947-da7dedc48f21?auto=format&fit=crop&w=400&q=80" alt="Chef Arshad"></div>
+          <div class="chef-info">
+            <h3>Chef Arshad Mehmood</h3>
+            <span class="chef-title">Nihari & Slow-Cook Expert</span>
+            <p class="chef-bio">Arshad's nihari simmers for 12 hours before the first bowl is served. His reverence for slow cooking and deep flavour is unmatched in the city.</p>
+            <span class="chef-exp">22 Years Experience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quality Promise -->
+  <section class="quality-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <p class="section-pre">Our Commitment</p>
+        <h2 class="section-title">The <span class="gold-text">Quality Promise</span></h2>
+        <p class="section-subtitle">Every ingredient, every step, every dish — held to the highest standard</p>
+      </div>
+      <div class="quality-grid">
+        <div class="quality-item reveal-up">
+          <span class="quality-icon">🌿</span>
+          <h3>Farm-Fresh Ingredients</h3>
+          <p>We source vegetables, herbs, and spices directly from trusted farms every morning. No shortcuts, no compromises.</p>
+        </div>
+        <div class="quality-item reveal-up">
+          <span class="quality-icon">🕌</span>
+          <h3>100% Halal Certified</h3>
+          <p>All meat is sourced from certified halal suppliers and handled with strict hygiene protocols throughout our kitchen.</p>
+        </div>
+        <div class="quality-item reveal-up">
+          <span class="quality-icon">🌶️</span>
+          <h3>Hand-Ground Spices</h3>
+          <p>Our signature spice blends are freshly ground in-house every day. No pre-packaged masala ever touches our karahis.</p>
+        </div>
+        <div class="quality-item reveal-up">
+          <span class="quality-icon">🚫</span>
+          <h3>No Artificial Additives</h3>
+          <p>No artificial colours, flavours, or preservatives. What you taste is exactly what nature and tradition provide.</p>
+        </div>
+        <div class="quality-item reveal-up">
+          <span class="quality-icon">🧑‍⚕️</span>
+          <h3>Food Safety Standards</h3>
+          <p>Our kitchen undergoes monthly third-party hygiene audits. We maintain international food safety standards daily.</p>
+        </div>
+        <div class="quality-item reveal-up">
+          <span class="quality-icon">❤️</span>
+          <h3>Cooked with Love</h3>
+          <p>Beyond ingredients and technique — every dish carries the genuine care of our team who treat every plate as their masterpiece.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-bg-glow"></div>
+    <div class="container">
+      <div class="cta-content reveal-up">
+        <h2>Ready to Experience <span class="gold-text">Royalty?</span></h2>
+        <p>Come dine with us or order now — the royal feast awaits you.</p>
+        <div class="cta-buttons">
+          <a href="menu.html" class="btn-primary btn-glow">Explore Menu</a>
+          <a href="contact.html" class="btn-secondary">Visit Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2024 Royal Karahi. All rights reserved. Crafted with ❤️ in Lahore.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank">📱</a>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

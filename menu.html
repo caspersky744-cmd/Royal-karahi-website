@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Royal Karahi Menu — Chicken Karahi, Biryani, Shawarma, Mutton and Beef dishes. Order online."/>
+  <title>Menu – Royal Karahi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="css/menu.css"/>
+  <link rel="stylesheet" href="css/polish.css"/>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">♛ Royal Karahi</div>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+    <p style="color:var(--text-muted);font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;margin-top:8px">Preparing your royal feast…</p>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">♛</span>
+        <span class="logo-text">Royal<span class="logo-accent">Karahi</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="menu.html"  class="nav-link active">Menu</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle"><span class="theme-icon">☀️</span></button>
+        <a href="cart.html" class="cart-btn" id="cartBtn">
+          <span class="cart-icon">🛒</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <a href="login.html" class="btn-login" id="loginBtn">Login</a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Menu Hero -->
+  <div class="menu-hero">
+    <div class="container">
+      <p class="section-pre reveal-up">Royal Karahi</p>
+      <h1 class="reveal-up">Our <span class="gold-text">Menu</span></h1>
+      <p class="reveal-up">Handcrafted dishes made with love, tradition, and the finest ingredients</p>
+    </div>
+  </div>
+
+  <!-- Controls Bar -->
+  <div class="menu-controls">
+    <div class="container">
+      <div class="controls-inner">
+        <div class="search-bar">
+          <span>🔍</span>
+          <input type="text" id="menuSearch" placeholder="Search dishes..." autocomplete="off"/>
+        </div>
+        <div class="filter-tabs" id="filterTabs">
+          <button class="filter-tab active" data-cat="all">🍽️ All</button>
+          <button class="filter-tab" data-cat="karahi">🍲 Karahi</button>
+          <button class="filter-tab" data-cat="biryani">🍚 Biryani</button>
+          <button class="filter-tab" data-cat="shawarma">🌯 Shawarma</button>
+          <button class="filter-tab" data-cat="mutton">🍖 Mutton</button>
+          <button class="filter-tab" data-cat="beef">🥩 Beef</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Content -->
+  <section class="menu-section">
+    <div class="container">
+      <div id="menuContent"><!-- Populated by JS --></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2024 Royal Karahi. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923001234567" class="whatsapp-float" target="_blank">📱</a>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+</html>
